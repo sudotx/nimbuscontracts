@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {PredictionMarket} from "../src/PredictionMarket.sol";
 import {IPredictionMarket} from "../src/interfaces/IPredictionMarket.sol";
 
@@ -33,7 +33,7 @@ contract PredictionMarketTest is Test {
         vm.stopPrank();
     }
 
-    function test_InitialState() public {
+    function test_InitialState() public view {
         assertEq(market.question(), "Will it rain tomorrow?");
         assertEq(market.CREATOR(), creator);
         assertEq(market.RESOLVER(), resolver);

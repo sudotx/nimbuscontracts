@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {PredictionMarketFactory} from "../src/PredictionMarketFactory.sol";
-import {PredictionMarket} from "../src/PredictionMarket.sol";
 import {IPredictionMarketFactory} from "../src/interfaces/IPredictionMarketFactory.sol";
 
 contract PredictionMarketFactoryTest is Test {
@@ -24,7 +23,7 @@ contract PredictionMarketFactoryTest is Test {
         vm.stopPrank();
     }
 
-    function test_InitialState() public {
+    function test_InitialState() public view {
         assertEq(factory.owner(), owner);
         assertEq(factory.feeRecipient(), feeRecipient);
         assertEq(factory.platformFeeBps(), platformFeeBps);
