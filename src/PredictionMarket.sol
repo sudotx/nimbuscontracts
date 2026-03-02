@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {IPredictionMarket} from "./interfaces/IPredictionMarket.sol";
-import {ReentrancyGuard} from "./ReentrancyGuard.sol";
-import {MathLib} from "./libraries/MathLib.sol";
+import { IPredictionMarket } from "./interfaces/IPredictionMarket.sol";
+import { ReentrancyGuard } from "./utils/ReentrancyGuard.sol";
+import { MathLib } from "./libraries/MathLib.sol";
 
 /**
  * @title PredictionMarket

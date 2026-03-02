@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {PredictionMarket} from "./PredictionMarket.sol";
-import {IPredictionMarketFactory} from "./interfaces/IPredictionMarketFactory.sol";
+import { PredictionMarket } from "./PredictionMarket.sol";
+import { IPredictionMarketFactory } from "./interfaces/IPredictionMarketFactory.sol";
 
 /**
  * @title PredictionMarketFactory

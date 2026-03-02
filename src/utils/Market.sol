@@ -26,6 +26,16 @@ struct MarketInfo {
     uint16 category;
     uint16 subcategory;
     uint64 createdAt;
+    uint64 startTime;
     uint64 endTime;
     uint64 resolvedAt;
 }
+
+event Trade(
+    address indexed trader,
+    bool indexed isYes,
+    bool indexed isBuy,
+    uint256 shares,
+    uint256 cost,
+    uint256 newPrice
+);
