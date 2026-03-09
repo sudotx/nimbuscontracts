@@ -18,6 +18,12 @@ enum MarketType {
 
 struct MarketInfo {
     MarketState marketState;
+    MarketCreationData marketCreationData;
+    uint64 createdAt;
+    uint64 resolvedAt;
+}
+
+struct MarketCreationData {
     MarketType marketType;
     address creator;
     address resolver;
@@ -25,10 +31,17 @@ struct MarketInfo {
     string description;
     uint16 category;
     uint16 subcategory;
-    uint64 createdAt;
     uint64 startTime;
     uint64 endTime;
-    uint64 resolvedAt;
+}
+
+struct MarketTemplate {
+    string name;
+    string description;
+    MarketType marketType;
+    uint256 suggestedDuration;
+    bool requiresOracle;
+    bool active;
 }
 
 event Trade(
@@ -39,3 +52,6 @@ event Trade(
     uint256 cost,
     uint256 newPrice
 );
+
+event TemplateAdded(bytes32 indexed templateId, string name);
+event TemplateUpdated(bytes32 indexed templateId);

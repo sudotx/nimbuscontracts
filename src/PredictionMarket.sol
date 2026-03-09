@@ -2,8 +2,11 @@
 pragma solidity ^0.8.20;
 
 import { IPredictionMarket } from "./interfaces/IPredictionMarket.sol";
-import { ReentrancyGuard } from "./utils/ReentrancyGuard.sol";
+
 import { MathLib } from "./libraries/MathLib.sol";
+
+import { MarketInfo, MarketState } from "./utils/Market.sol";
+import { ReentrancyGuard } from "./utils/ReentrancyGuard.sol";
 
 /**
  * @title PredictionMarket
@@ -137,16 +140,7 @@ contract PredictionMarket is IPredictionMarket, ReentrancyGuard {
                               CONSTRUCTOR
     //////////////////////////////////////////////////////////////*/
 
-    constructor(
-        string memory _question,
-        string memory _description,
-        address _creator,
-        address _resolver,
-        uint256 _endTime,
-        uint256 _resolutionTime,
-        uint16 _platformFeeBps,
-        address _feeRecipient
-    ) {
+    constructor(MarketInfo calldata marketInfo) {
         require(_endTime > block.timestamp, "Invalid end time");
         require(_resolutionTime > _endTime, "Invalid resolution time");
         require(_creator != address(0), "Invalid creator");
