@@ -42,10 +42,6 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
         approvedResolvers[msg.sender] = true;
     }
 
-    /**
-     * @notice Create a new binary prediction market
-     * @return market Address of the created market
-     */
     function createBinaryMarket(MarketCreationData calldata marketCreationData) external returns (address market) {
         _validateMarketParams(marketCreationData);
         market = address(new PredictionMarket(marketCreationData));
