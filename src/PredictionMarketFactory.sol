@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 import { IPredictionMarketFactory } from "./interfaces/IPredictionMarketFactory.sol";
 
-import { MarketCreationData } from "./utils/Market.sol";
+import { MarketCreationData, MarketType } from "./utils/Market.sol";
 import { PredictionMarket } from "./PredictionMarket.sol";
 
 /**
@@ -12,6 +12,7 @@ import { PredictionMarket } from "./PredictionMarket.sol";
  * @dev Supports multiple market types, categories, and resolution mechanisms.
  */
 contract PredictionMarketFactory is IPredictionMarketFactory {
+    address public token; 
     uint16 public constant MAX_FEE_BPS = 500;
 
     uint16 public platformFeeBps;
@@ -22,7 +23,6 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
 
     uint256 public allMarketsLength;
 
-    mapping(address => MarketInfo) public marketInfos;
     mapping(address => bool) public approvedResolvers;
 
     receive() external payable {}
@@ -32,10 +32,15 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
         _;
     }
 
-    constructor(address _feeRecipient, uint16 _platformFeeBps) {
+    constructor(
+        address _feeRecipient,
+        uint16 _platformFeeBps,
+        address _token
+    ) {
         require(_feeRecipient != address(0), "Invalid recipient");
         require(_platformFeeBps <= MAX_FEE_BPS, "Fee too high");
         
+        token = _token;
         owner = msg.sender;
         feeRecipient = _feeRecipient;
         platformFeeBps = _platformFeeBps;
@@ -44,17 +49,18 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
 
     function createBinaryMarket(MarketCreationData calldata marketCreationData) external returns (address market) {
         _validateMarketParams(marketCreationData);
-        market = address(new PredictionMarket(marketCreationData));
-        _registerMarket(market, marketCreationData);
+        market = address(new PredictionMarket(token, marketCreationData));
+
+        allMarketsLength++;
 
         emit MarketCreated(
             market,
             msg.sender,
-            resolver,
-            question,
-            category,
+            marketCreationData.resolver,
+            marketCreationData.question,
+            marketCreationData.category,
             MarketType.BINARY,
-            endTime
+            marketCreationData.endTime
         );
     }
 
@@ -90,11 +96,15 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
         }
     }
 
-    function setMinMarketDuration(uint256 duration) external onlyOwner {
+    function setNewToken(address _token) external onlyOwner {
+       token = _token;
+    }
+
+    function setMinMarketDuration(uint24 duration) external onlyOwner {
         minMarketDuration = duration;
     }
 
-    function setMaxMarketDuration(uint256 duration) external onlyOwner {
+    function setMaxMarketDuration(uint24 duration) external onlyOwner {
         maxMarketDuration = duration;
     }
 
@@ -107,34 +117,13 @@ contract PredictionMarketFactory is IPredictionMarketFactory {
         return allMarketsLength;
     }
 
-    function getMarketInfo(address market) 
-        external 
-        view 
-        returns (MarketCreationData memory) 
-    {
-        return marketInfos[market];
-    }
-
-    function _validateMarketParams(MarketCreationData calldata marketCreationData) internal {
+    function _validateMarketParams(MarketCreationData calldata marketCreationData) internal view {
         address resolver = marketCreationData.resolver;
         uint256 duration = marketCreationData.endTime - block.timestamp;
-        uint64 marketStartTime = marketCreationData.startTime;
         uint64 marketEndTime = marketCreationData.endTime;
 
-        if (marketStartTime <= block.timestamp) revert BackdatedMarket();
-        if (marketEndTime <= marketStartTime || marketEndTime <= block.timestamp) revert InvalidEndTime();
-        if (!approvedResolvers[marketCreationData.resolver]) revert ResolverNotApproved();
+        if (marketEndTime <= block.timestamp) revert InvalidEndTime();
+        if (!approvedResolvers[resolver]) revert ResolverNotApproved();
         if (duration < minMarketDuration || duration > maxMarketDuration) revert InvalidDuration();
-    }
-
-    function _registerMarket(address market, MarketCreationData calldata marketCreationData) internal {
-        marketInfos[market] = MarketInfo(
-            MarketState.PRETRADE,
-            marketCreationData,
-            block.timestamp,
-            0 // Unresolved.
-        );
-
-        allMarketsLength++;
     }
 }

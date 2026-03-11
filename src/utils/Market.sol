@@ -2,7 +2,6 @@
 pragma solidity ^0.8.20;
 
 enum MarketState {
-    PRETRADE,   // Trading not yet active.
     OPEN,       // Trading active.
     CLOSED,     // Trading ended, awaiting resolution.
     RESOLVED,   // Outcome determined.
@@ -27,11 +26,12 @@ struct MarketCreationData {
     MarketType marketType;
     address creator;
     address resolver;
+    address feeRecipient;
+    uint16 platformFeeBps;
     string question;
     string description;
     uint16 category;
     uint16 subcategory;
-    uint64 startTime;
     uint64 endTime;
 }
 
@@ -43,15 +43,3 @@ struct MarketTemplate {
     bool requiresOracle;
     bool active;
 }
-
-event Trade(
-    address indexed trader,
-    bool indexed isYes,
-    bool indexed isBuy,
-    uint256 shares,
-    uint256 cost,
-    uint256 newPrice
-);
-
-event TemplateAdded(bytes32 indexed templateId, string name);
-event TemplateUpdated(bytes32 indexed templateId);
