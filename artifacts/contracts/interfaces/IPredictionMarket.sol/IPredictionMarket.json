@@ -1,0 +1,438 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IPredictionMarket",
+  "sourceName": "contracts/interfaces/IPredictionMarket.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Nimbus_AlreadyClaimed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_DeflatedCost",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_InflatedCost",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_InsufficientAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_InsufficientLiquidity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_InvalidAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketAlreadyResolved",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketClosed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketInvalid",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketNotClosed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketNotInvalid",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_MarketNotResolved",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_NoFees",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_NoWinnings",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_NotOpen",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_Reentrancy",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_TooEarly",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Nimbus_Unauthorized",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "trader",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "cost",
+          "type": "uint256"
+        }
+      ],
+      "name": "Buy",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "FeesCollected",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "MarketInvalidated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "outcome",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "MarketResolved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "trader",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "cost",
+          "type": "uint256"
+        }
+      ],
+      "name": "Sell",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "WinningsClaimed",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        }
+      ],
+      "name": "buy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claim",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "payout",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claimRefund",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "refund",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBuyQuote",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "yesPrice",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "noPrice",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct Prices",
+          "name": "newPrices",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSellQuote",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "cost",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "yesPrice",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "noPrice",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct Prices",
+          "name": "newPrices",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getUserPosition",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "yesBalance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "noBalance",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IPredictionMarket.UserPosition",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "invalidate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "outcome",
+          "type": "bool"
+        }
+      ],
+      "name": "resolve",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "shares",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "minReturn",
+          "type": "uint256"
+        }
+      ],
+      "name": "sell",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

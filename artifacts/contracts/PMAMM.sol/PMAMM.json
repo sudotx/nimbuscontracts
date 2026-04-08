@@ -1,0 +1,167 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "PMAMM",
+  "sourceName": "contracts/PMAMM.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Infinity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Min",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NegativeInfinity",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "OutOfBounds",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PMAMM_XLiquidityDepleted",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PMAMM_XLiquidityInsufficient",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PMAMM_YLiquidityDepleted",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PMAMM_YLiquidityInsufficient",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "END_TIME",
+      "outputs": [
+        {
+          "internalType": "uint96",
+          "name": "",
+          "type": "uint96"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "LIQUIDITY_FACTOR",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_PRICE",
+      "outputs": [
+        {
+          "internalType": "int64",
+          "name": "",
+          "type": "int64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "STARTING_PRICE",
+      "outputs": [
+        {
+          "internalType": "int64",
+          "name": "",
+          "type": "int64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getEffectiveLiquidity",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "leff",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPriceFromReserves",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "int256",
+              "name": "yesPrice",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "noPrice",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct Prices",
+          "name": "prices",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "xReserve",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "yReserve",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
